@@ -16,6 +16,8 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
     }
 
+    private boolean allapot=false;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,6 +60,9 @@ public class MainForm extends javax.swing.JFrame {
         setTitle("BlackJack");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -204,6 +209,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Kilepes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -212,6 +222,11 @@ public class MainForm extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonMenuItem1);
         jRadioButtonMenuItem1.setText("Kockáztat");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jRadioButtonMenuItem1);
 
         buttonGroup1.add(jRadioButtonMenuItem2);
@@ -264,31 +279,56 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabel5AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel5AncestorAdded
-        Icon icon=new ImageIcon(this.getClass().getResource("res/Blackjack-singlehand.jpg"));
+        Icon icon = new ImageIcon(this.getClass().getResource("res/Blackjack-singlehand.jpg"));
         jLabel5.setIcon(icon);
     }//GEN-LAST:event_jLabel5AncestorAdded
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       mentes();
+        mentes();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         mentes();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    public void mentes(){
-       
-        Icon icon=new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
-        int gomb=JOptionPane.showConfirmDialog(this, "Fájl neve:","Kérdés",JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
-        if(gomb == JOptionPane.OK_OPTION){
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        kilepes();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        kilepes();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        if(jRadioButtonMenuItem1.isSelected()){
+        allapot=true;
+        }
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    public void mentes() {
+        Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+        int gomb = JOptionPane.showConfirmDialog(this, "Fájl neve:", "Kérdés", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+        if (gomb == JOptionPane.OK_OPTION) {
             System.exit(0);
         }
     }
-    
+
+    public void kilepes() {
+        if (allapot) {
+            Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+            int gomb = JOptionPane.showConfirmDialog(this, "Biztos kilép?", "Kérdés", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+            if (gomb == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }else if(gomb == JOptionPane.CANCEL_OPTION){
+              
+            }
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
